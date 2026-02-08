@@ -9,16 +9,13 @@ export default function Page() {
   const [seconds, setSeconds] = useState(0);
   const [running, setRunning] = useState(false);
 
-  // 초기 로드
   useEffect(() => {
     const saved = localStorage.getItem(KEY);
     const isRunning = localStorage.getItem(RUNNING_KEY) === "true";
-
     if (saved) setSeconds(Number(saved));
     if (isRunning) setRunning(true);
   }, []);
 
-  // 타이머
   useEffect(() => {
     if (!running) return;
 
@@ -31,11 +28,9 @@ export default function Page() {
     }, 1000);
 
     localStorage.setItem(RUNNING_KEY, "true");
-
     return () => clearInterval(id);
   }, [running]);
 
-  // 스탑 시 상태 저장
   useEffect(() => {
     if (!running) {
       localStorage.setItem(RUNNING_KEY, "false");
@@ -46,25 +41,35 @@ export default function Page() {
   const minutes = Math.floor(seconds / 60);
   const secs = seconds % 60;
 
+  const onClear = () => {
+    setSeconds(0);
+    setRunning(false);
+    localStorage.setItem(KEY, "0");
+    localStorage.setItem(RUNNING_KEY, "false");
+  };
+
   return (
-    <div className="outer">
-      <div className="widget">
-        <button className="clear" onClick={() => {
-          setSeconds(0);
-          setRunning(false);
-          localStorage.setItem(KEY, "0");
-          localStorage.setItem(RUNNING_KEY, "false");
-        }}>
+    <div className="card">
+      <div className="topbar">
+        <button className="clearBtn" onClick={onClear}>
           CLEAR
         </button>
+      </div>
 
+      <div className="body">
         <div className="time">
-          {minutes} : {secs}
+          {minutes}
+          <span className="colon">:</span>
+          {secs}
         </div>
 
         <div className="buttons">
-          <button onClick={() => setRunning(true)}>START</button>
-          <button onClick={() => setRunning(false)}>STOP</button>
+          <button className="btn" onClick={() => setRunning(true)} disabled={running}>
+            START
+          </button>
+          <button className="btn" onClick={() => setRunning(false)} disabled={!running}>
+            STOP
+          </button>
         </div>
       </div>
     </div>
