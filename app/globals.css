@@ -1,9 +1,9 @@
 :root{
   /* 본체(배경) 연하늘: 더 진하게 */
-  --sky: #9fd5ff;
+  --sky: #D4E4F2;
 
   /* 버튼/상단 바: 본체보다 한 톤 더 진하게 */
-  --sky-deep: #6fbaf6;
+  --sky-deep: #BAD1E6;
 
   --white: #ffffff;
 
