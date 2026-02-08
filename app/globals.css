@@ -1,72 +1,120 @@
-:root {
-  --outer-white: #ffffff;
-  --inner-sky: #eef7ff;
-  --text-main: #5f6f7a;
-  --text-soft: #8fa3b1;
-  --border-soft: #e6eef5;
+:root{
+  /* 본체(배경) 연하늘: 더 진하게 */
+  --sky: #9fd5ff;
+
+  /* 버튼/상단 바: 본체보다 한 톤 더 진하게 */
+  --sky-deep: #6fbaf6;
+
+  --white: #ffffff;
+
+  /* 글자/숫자 그림자(아주 약하게) */
+  --shadow-text: rgba(0, 0, 0, 0.18);
+
+  /* 카드 그림자(아주 약하게) */
+  --shadow-card: rgba(0, 0, 0, 0.12);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html, body {
+html, body{
   margin: 0;
   padding: 0;
-  background: transparent; /* 🔴 노션 배경 비치지 않게 */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  background: transparent; /* 노션 배경과 충돌 최소화 */
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif;
 }
 
-.outer {
-  background: var(--outer-white);
-  padding: 18px;
-  border-radius: 20px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+/* 노션 embed에서 보기 좋은 '한 덩어리' 카드 */
+.card{
+  width: min(520px, 92vw);
+  background: var(--sky);
+  border-radius: 22px;
+  box-shadow: 0 10px 25px var(--shadow-card);
+  overflow: hidden;
+  position: relative;
 }
 
-.widget {
-  background: var(--inner-sky);
-  border-radius: 16px;
-  padding: 20px 18px 22px;
-  min-width: 240px;
+/* 상단 영역(우상단 CLEAR 배치용) */
+.topbar{
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 12px 0 12px;
+}
+
+/* CLEAR 버튼도 배경 있는 pill 형태 */
+.clearBtn{
+  border: none;
+  background: var(--sky-deep);
+  color: var(--white);
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  font-size: 12px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+.clearBtn:hover{
+  filter: brightness(1.03);
+}
+.clearBtn:active{
+  transform: translateY(1px);
+}
+
+/* 메인 영역 */
+.body{
+  padding: 10px 18px 20px 18px;
   text-align: center;
 }
 
-.clear {
-  background: transparent;
-  border: none;
-  color: var(--text-soft);
-  font-weight: 600;
-  font-size: 12px;
-  cursor: pointer;
-  margin-bottom: 10px;
+.time{
+  color: var(--white);
+  font-weight: 900;
+  font-size: clamp(52px, 8vw, 76px);
+  letter-spacing: 1px;
+  text-shadow: 0 2px 10px var(--shadow-text); /* 아주 살짝 */
+  user-select: none;
+  margin: 4px 0 18px;
 }
 
-.time {
-  font-size: 42px;
-  font-weight: 700;
-  color: var(--text-main);
-  margin: 6px 0 16px;
-}
-
-.buttons {
+/* 버튼들 */
+.buttons{
   display: flex;
   justify-content: center;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
-button {
-  background: #ffffff;
-  border: 1px solid var(--border-soft);
-  border-radius: 12px;
-  padding: 10px 18px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-main);
+.btn{
+  border: none;
+  background: var(--sky-deep);
+  color: var(--white);
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  padding: 12px 18px;
+  border-radius: 16px;
   cursor: pointer;
+  min-width: 120px;
+  box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+  transition: transform 120ms ease, filter 120ms ease;
 }
 
-button:hover {
-  background: #f7fbff;
+.btn:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.btn:active{
+  transform: translateY(0px);
+}
+
+.btn[disabled]{
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* 콜론 간격 예쁘게 */
+.colon{
+  display: inline-block;
+  margin: 0 10px;
+  opacity: 0.95;
 }
